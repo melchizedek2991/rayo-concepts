@@ -6,6 +6,7 @@
 
 import { useState } from "react";
 import { services } from "../data/services";
+import { supabase } from "../utils/supabase";
 
 // --------------------------------------------------
 // Form data type
@@ -93,29 +94,43 @@ function SubmitTopic() {
     }));
   }
 
-  // ------------------------------------------------
-  // Handle form submission
-  // For Milestone 2A, this only simulates submission.
-  // Supabase will be connected in Milestone 2B.
-  // ------------------------------------------------
+ async function handleSubmit(
+  event: React.FormEvent<HTMLFormElement>
+) {
+  event.preventDefault();
 
-  function handleSubmit(
-    event: React.FormEvent<HTMLFormElement>
-  ) {
-    event.preventDefault();
+  setIsSubmitting(true);
 
-    setIsSubmitting(true);
+  const { error } = await supabase
+    .from("service_requests")
+    .insert({
+      full_name: formData.fullName,
+      phone: formData.phone,
+      email: formData.email || null,
+      university: formData.university,
+      faculty: formData.faculty,
+      department: formData.department,
+      project_topic: formData.projectTopic,
+      service_id: formData.serviceId,
+      deadline: formData.deadline || null,
+      requirements: formData.requirements || null,
+    });
 
-    // Temporary simulation.
-    // We will replace this with Supabase later.
+  if (error) {
+    console.error("Project submission error:", error);
 
-    setTimeout(() => {
-      console.log("Project request:", formData);
+    setIsSubmitting(false);
 
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 1000);
+    alert(
+      "We could not submit your request. Please try again."
+    );
+
+    return;
   }
+
+  setIsSubmitting(false);
+  setIsSubmitted(true);
+}
 
   // ------------------------------------------------
   // Success screen
