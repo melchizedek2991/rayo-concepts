@@ -21,21 +21,21 @@ function Header() {
           </a>
 
           <a
-            href="#services"
+            href="/services"
             className="text-sm font-medium text-gray-600 transition hover:text-green-700"
           >
             Services
           </a>
 
           <a
-            href="#how-it-works"
+            href="/#how-it-works"
             className="text-sm font-medium text-gray-600 transition hover:text-green-700"
           >
             How It Works
           </a>
 
           <a
-            href="#contact"
+            href="/#contact"
             className="text-sm font-medium text-gray-600 transition hover:text-green-700"
           >
             Contact

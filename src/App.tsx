@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import SubmitTopic from "./pages/SubmitTopic";
 import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
+import Services from "./pages/Services";
+import ServiceDetails from "./pages/ServiceDetails";
 
 function App() {
   // ------------------------------------------------
@@ -23,6 +25,14 @@ function App() {
 
   if (path === "/admin/login") {
     return <AdminLogin />;
+  }
+
+  if (path.startsWith("/services/")) {
+  return <ServiceDetails />;
+}
+
+  if (path === "/services") {
+  return <Services />;
   }
 
   if (path === "/admin") {
